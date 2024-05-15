@@ -9,9 +9,10 @@ import { updatePackagesStatus } from "./services/backgroundServices";
 
 
 
-const PORT = "20000";
 const app: Express = express();
 dotenv.config();
+
+const PORT = process.env.PORT || 20000
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,6 +46,7 @@ cron.schedule("* * * * *", () => {
 sequelizeConnection
   .sync()
   .then(result => {
+    console.log(`listening on ${PORT}`);
     console.log("Database connected");
     app.listen(PORT);
   })

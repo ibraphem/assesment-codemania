@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  cma_app:
+    container_name: cma_app
+    build: .
+    image: ibraphem/cma_live_app
+    ports:
+      - "20000:20000"
+    environment:
+      - PG_DB=cma_live_db
+      - PG_USER=ibraphem
+      - PG_PASSWORD=12345
+      - PG_HOST=cma_db
+    restart: always
+    depends_on:
+      - cma_db
+  
+  cma_db:
+    container_name: cma_db
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=cma_live_db
+      - POSTGRES_USER=ibraphem
+      - POSTGRES_PASSWORD=12345
+    volumes:
+      - cma_db_data:/var/lib/postgresql/data
+
+volumes:
+  cma_db_data: {}
+
+
+

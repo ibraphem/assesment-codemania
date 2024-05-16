@@ -53,4 +53,6 @@ sequelizeConnection
     console.log("Database connected");
     app.listen(PORT);
   })
-  .catch(err => console.log(err));
+  .catch(error => {
+    console.error('Database synchronization failed:', error);
+  });

@@ -2,21 +2,21 @@ version: "3.9"
 
 services:
   cma_app:
+    networks:
+      - app-network
     container_name: cma_app
     build: .
     image: ibraphem/cma_live_app
     ports:
       - "20000:20000"
-    environment:
-      - PG_DB=cma_live_db
-      - PG_USER=ibraphem
-      - PG_PASSWORD=12345
-      - PG_HOST=cma_db
+
     restart: always
     depends_on:
       - cma_db
   
   cma_db:
+    networks:
+      - app-network
     container_name: cma_db
     image: postgres
     ports:

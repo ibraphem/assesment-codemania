@@ -41,7 +41,8 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 //   updatePackagesStatus().catch((error) => console.error("Error:", error));
 // });
 
-
+app.listen(PORT);
+console.log(`listening on ${PORT}`);
 
 
 
@@ -49,9 +50,9 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 sequelizeConnection
   .sync()
   .then(result => {
-    console.log(`listening on ${PORT}`);
+    console.log(`listening2 on ${PORT}`);
     console.log("Database connected");
-    app.listen(PORT);
+  
   })
   .catch(error => {
     console.error('Database synchronization failed:', error);

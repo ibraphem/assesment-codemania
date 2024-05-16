@@ -1,0 +1,13 @@
+services:
+  my-service:
+    type: web
+    env:
+      DB_HOST: ${docker.compose.PG_HOST}
+      DB_PORT: 5432
+      DB_USERNAME: ${docker.compose.PG_USER}
+      DB_PASSWORD: ${docker.compose.PG_PASSWORD}
+    docker:
+      image: ibraphem/cma_live_app
+      command: []
+    dependencies:
+      - postgres

@@ -2,10 +2,10 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv"
 import sequelizeConnection from "./utils/database";
-// import userRoutes from "./routes/user";
-// import cron from "node-cron";
-// import packageRoutes from "./routes/package";
-// import { updatePackagesStatus } from "./services/backgroundServices";
+import userRoutes from "./routes/user";
+import cron from "node-cron";
+import packageRoutes from "./routes/package";
+import { updatePackagesStatus } from "./services/backgroundServices";
 
 
 
@@ -24,8 +24,8 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send("Welcome");
 });
 
-// app.use("/api/user", userRoutes);
-// app.use("/api/package", packageRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/package", packageRoutes);
 
 //error handling
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
@@ -41,6 +41,8 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 //   updatePackagesStatus().catch((error) => console.error("Error:", error));
 // });
 
+console.log("pg", process.env.PG_DB);
+
 
 
 
@@ -49,9 +51,9 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 sequelizeConnection
   .sync()
   .then(result => {
-    console.log(`listening on ${PORT}`);
     console.log("Database connected");
     app.listen(PORT);
+    console.log(`listening on ${PORT}`);
   })
   .catch(error => {
     console.error('Database synchronization failed:', error);

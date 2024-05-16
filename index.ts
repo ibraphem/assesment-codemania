@@ -1,7 +1,7 @@
 import express, { Express, Request, Response, NextFunction } from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv"
-// import sequelizeConnection from "./utils/database";
+import sequelizeConnection from "./utils/database";
 // import userRoutes from "./routes/user";
 // import cron from "node-cron";
 // import packageRoutes from "./routes/package";
@@ -42,16 +42,15 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 // });
 
 
-app.listen(PORT);
-console.log(`listening on ${PORT}`);
+
 
 
 //sync database
-// sequelizeConnection
-//   .sync()
-//   .then(result => {
-//     console.log(`listening on ${PORT}`);
-//     console.log("Database connected");
-//     app.listen(PORT);
-//   })
-//   .catch(err => console.log(err));
+sequelizeConnection
+  .sync()
+  .then(result => {
+    console.log(`listening on ${PORT}`);
+    console.log("Database connected");
+    app.listen(PORT);
+  })
+  .catch(err => console.log(err));

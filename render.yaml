@@ -13,15 +13,11 @@ services:
       - key: PG_HOST
         value: cma_db
     autoDeploy: true
+    healthCheckPath: /
 
-  - type: pserv
-    name: cma_db
+databases:
+  - name: cma_db
+    databaseName: cma_live_db
+    user: ibraphem
+    password: 12345
     plan: free
-    env: postgres
-    envVars:
-      - key: POSTGRES_DB
-        value: cma_live_db
-      - key: POSTGRES_USER
-        value: ibraphem
-      - key: POSTGRES_PASSWORD
-        value: 12345

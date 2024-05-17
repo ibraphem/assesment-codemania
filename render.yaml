@@ -3,8 +3,6 @@ services:
     name: cma_app
     env: docker
     dockerfilePath: ./Dockerfile
-    ports:
-      - 20000
     envVars:
       - key: PG_DB
         value: cma_live_db
@@ -14,6 +12,8 @@ services:
         value: 12345
       - key: PG_HOST
         value: cma_db
+    port: 20000
+    autoDeploy: true
 
 databases:
   - name: cma_db

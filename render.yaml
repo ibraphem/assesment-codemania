@@ -11,7 +11,7 @@ services:
       - key: PG_PASSWORD
         value: 12345
       - key: PG_HOST
-        value: ${database.cma_db.internalHost}
+        value: ${databases.cma_db.internalHost}
     autoDeploy: true
     healthCheckPath: /
 
@@ -19,7 +19,7 @@ databases:
   - name: cma_db
     databaseName: cma_live_db
     user: ibraphem
-    defaultDatabase: cma_live_db
     plan: free
-    properties:
-      POSTGRES_PASSWORD: 12345
+    envVars:
+      - key: POSTGRES_PASSWORD
+        value: 12345

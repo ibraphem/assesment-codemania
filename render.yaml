@@ -1,13 +1,25 @@
 services:
-  my-service:
-    type: web
-    env:
-      DB_HOST: ${docker.compose.PG_HOST}
-      DB_PORT: 5432
-      DB_USERNAME: ${docker.compose.PG_USER}
-      DB_PASSWORD: ${docker.compose.PG_PASSWORD}
-    docker:
-      image: ibraphem/cma_live_app
-      command: []
-    dependencies:
-      - postgres
+  - type: web
+    name: cma_app
+    env: docker
+    dockerfilePath: ./Dockerfile
+    ports:
+      - 20000
+    envVars:
+      - key: PG_DB
+        value: cma_live_db
+      - key: PG_USER
+        value: ibraphem
+      - key: PG_PASSWORD
+        value: 12345
+      - key: PG_HOST
+        value: cma_db
+
+databases:
+  - name: cma_db
+    plan: free
+    postgresVersion: 13
+    properties:
+      POSTGRES_DB: cma_live_db
+      POSTGRES_USER: ibraphem
+      POSTGRES_PASSWORD: 12345

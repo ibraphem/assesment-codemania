@@ -20,6 +20,5 @@ databases:
     databaseName: cma_live_db
     user: ibraphem
     plan: free
-    envVars:
-      - key: POSTGRES_PASSWORD
-        value: 12345
+    postgresMajorVersion: 14
+
